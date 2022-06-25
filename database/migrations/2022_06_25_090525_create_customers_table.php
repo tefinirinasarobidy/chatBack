@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('email');
             $table->string('username');
             $table->string('password');
             $table->string('sexe')->nullable();
