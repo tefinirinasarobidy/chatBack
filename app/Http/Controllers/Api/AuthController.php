@@ -52,8 +52,8 @@ class AuthController extends Controller
                     'status_code' => 401
                 ];
             }
-            $tokenResult = $user_email->createToken('Personal Access Token');
-            $token = $tokenResult->plainTextToken;
+            $tokenResult = $user_email->createToken('Personal Access Token')->accessToken;
+            $token = $tokenResult;
             $token_type = 'Bearer';
             
             return response()->json(
