@@ -22,4 +22,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // https://chatback-sarobidy.herokuapp.com/ https://git.heroku.com/chatback-sarobidy.git
-// git push heroku feature/register
+// git push heroku main
