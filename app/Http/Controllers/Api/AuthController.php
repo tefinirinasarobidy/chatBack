@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Customers;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -45,7 +47,8 @@ class AuthController extends Controller
             'message' => 'user enregistrer',
             'access_token' => $access_token,
             'token_type' => $token_type,
-            'expires_at' => $expires_at
+            'expires_at' => $expires_at,
+            'user' => $user->id
         ]);
     }
     public function login(Request $request)
@@ -72,7 +75,21 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $access_token,
             'token_type' => $token_type,
-            'expires_at' => $expires_at
+            'expires_at' => $expires_at,
+            'user' => $user->id
         ], 200);
     }
+     public function logout(Request $request)
+     {
+        try{
+            $token = Auth::user()->token();
+            $token->revoke();
+            $response = ["succes" => "Vous avez déconnecter!!"];
+            return response($response);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+     }
 }

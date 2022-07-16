@@ -18,4 +18,13 @@ class Customers extends Authenticatable
     protected $primaryKey = "id";
 
     protected $keyType = "string";
+
+    public function profile()
+    {
+        return $this->hasMany(Profile::class,'customer_id');
+    }
+    public function active_profile()
+    {
+        return $this->hasMany(Profile::class,'customer_id')->where('status',1)->first();
+    }
 }
